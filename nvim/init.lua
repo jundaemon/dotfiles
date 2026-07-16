@@ -40,6 +40,7 @@ local capabilities = require("blink.cmp").get_lsp_capabilities()
 vim.lsp.config("lua_ls", { settings = { Lua = { diagnostics = { globals = { "vim" } } } } })
 vim.lsp.enable("lua_ls", { capabilities = capabilities })
 vim.lsp.enable("ty", { capabilities = capabilities })
+vim.lsp.enable("zls", { capabilities = capabilities })
 
 -- Formatting
 vim.pack.add({ { src = "https://github.com/stevearc/conform.nvim" } })
@@ -49,6 +50,7 @@ require("conform").setup({
 	formatters_by_ft = {
 		python = { "black", "isort" },
 		lua = { "stylua" },
+		zig = { "zigfmt" },
 	},
 })
 
