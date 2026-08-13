@@ -39,8 +39,9 @@ vim.keymap.set("n", "<leader>o", "<C-o>", {})
 local capabilities = require("blink.cmp").get_lsp_capabilities()
 vim.lsp.config("lua_ls", { settings = { Lua = { diagnostics = { globals = { "vim" } } } } })
 vim.lsp.enable("lua_ls", { capabilities = capabilities })
-vim.lsp.config("ruff", { init_options = { settings = { lint = { enable = false } } } })
 vim.lsp.enable("ty", { capabilities = capabilities })
+vim.lsp.config("ruff", { init_options = { settings = { lint = { enable = false } } } })
+vim.lsp.enable("ruff")
 vim.lsp.enable("zls", { capabilities = capabilities })
 
 -- Formatting
@@ -50,7 +51,7 @@ require("conform").setup({
 	format_on_save = { lsp_format = "fallback" },
 	formatters_by_ft = {
 		lua = { "stylua" },
-		python = { "ruff" },
+		python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
 		zig = { "zigfmt" },
 	},
 })
