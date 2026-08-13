@@ -27,7 +27,7 @@ vim.pack.add({
 })
 
 require("mason").setup()
-require("mason-lspconfig").setup({ ensure_installed = { "lua_ls", "ruff" } })
+require("mason-lspconfig").setup({ ensure_installed = { "lua_ls", "stylua", "ty", "ruff" } })
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
@@ -39,7 +39,8 @@ vim.keymap.set("n", "<leader>o", "<C-o>", {})
 local capabilities = require("blink.cmp").get_lsp_capabilities()
 vim.lsp.config("lua_ls", { settings = { Lua = { diagnostics = { globals = { "vim" } } } } })
 vim.lsp.enable("lua_ls", { capabilities = capabilities })
-vim.lsp.enable("ruff", { capabilities = capabilities })
+vim.lsp.config("ruff", { init_options = { settings = { lint = { enable = false } } } })
+vim.lsp.enable("ty", { capabilities = capabilities })
 vim.lsp.enable("zls", { capabilities = capabilities })
 
 -- Formatting
@@ -48,8 +49,8 @@ vim.pack.add({ { src = "https://github.com/stevearc/conform.nvim" } })
 require("conform").setup({
 	format_on_save = { lsp_format = "fallback" },
 	formatters_by_ft = {
-		python = { "ruff" },
 		lua = { "stylua" },
+		python = { "ruff" },
 		zig = { "zigfmt" },
 	},
 })
