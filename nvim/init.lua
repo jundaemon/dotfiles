@@ -42,6 +42,7 @@ vim.lsp.enable("lua_ls", { capabilities = capabilities })
 vim.lsp.enable("ty", { capabilities = capabilities })
 vim.lsp.config("ruff", { init_options = { settings = { lint = { enable = false } } } })
 vim.lsp.enable("ruff")
+vim.lsp.enable("zls", { capabilities = capabilities })
 
 -- Formatting
 vim.pack.add({ { src = "https://github.com/stevearc/conform.nvim" } })
@@ -51,6 +52,7 @@ require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
 		python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
+		zig = { "zigfmt" },
 	},
 })
 
